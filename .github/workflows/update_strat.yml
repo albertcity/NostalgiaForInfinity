@@ -17,9 +17,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Fetch release version
         run: |
-           rm -rf user_data/data/*
-           git pull --recurse-submodules
-           git submodule update --remote --recursive
+           rm -rf user_data/data
+           git submodule sync
+           git submodule update --init --remote --recursive
            cp NostalgiaForInfinityX.py user_data/strategies
            cp NostalgiaForInfinityX2.py user_data/strategies
            cp NostalgiaForInfinityX3.py user_data/strategies
