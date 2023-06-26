@@ -65,7 +65,7 @@ class NostalgiaForInfinityX3(IStrategy):
     INTERFACE_VERSION = 3
 
     def version(self) -> str:
-        return "v13.0.157"
+        return "v13.0.163"
 
     # ROI table:
     minimal_roi = {
@@ -151,7 +151,7 @@ class NostalgiaForInfinityX3(IStrategy):
     # Grinding take profit threshold
     grinding_profit_threshold = 0.018
     # Grinding stakes
-    grinding_stakes = [0.5, 0.5, 0.5]
+    grinding_stakes = [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
     grinding_stakes_alt_1 = [0.5, 0.5, 0.5]
     grinding_stakes_alt_2 = [0.75, 0.75]
     # Current total profit
@@ -1380,12 +1380,15 @@ class NostalgiaForInfinityX3(IStrategy):
                                 or
                                 (
                                     (last_candle['rsi_14'] < 36.0)
+                                    and (last_candle['rsi_3'] > 5.0)
                                     and (last_candle['close'] < (last_candle['bb20_2_low'] * 1.0))
-                                    and (last_candle['ema_12'] < (last_candle['ema_26'] * 0.990))
+                                    and (last_candle['ema_12'] < (last_candle['ema_26'] * 0.995))
                                     and (last_candle['rsi_3_15m'] > 10.0)
                                     and (last_candle['cti_20_1h'] < 0.5)
-                                    and (last_candle['rsi_3_1h'] > 10.0)
+                                    and (last_candle['rsi_3_1h'] > 20.0)
                                     and (last_candle['rsi_3_4h'] > 20.0)
+                                    and (last_candle['not_downtrend_1h'])
+                                    and (last_candle['not_downtrend_4h'])
                                 )
                                 or
                                 (
@@ -1407,7 +1410,7 @@ class NostalgiaForInfinityX3(IStrategy):
                                     and (last_candle['tsi'] > last_candle['tsi_signal'])
                                     and (previous_candle['tsi'] < previous_candle['tsi_signal'])
                                     and (last_candle['rsi_3_15m'] > 5.0)
-                                    and (last_candle['rsi_3_1h'] > 10.0)
+                                    and (last_candle['rsi_3_1h'] > 30.0)
                                     and (last_candle['rsi_3_4h'] > 30.0)
                                 )
                                 or
@@ -1449,7 +1452,7 @@ class NostalgiaForInfinityX3(IStrategy):
                                     and (last_candle['rsi_3'] > 5.0)
                                     and (last_candle['rsi_14_15m'] > previous_candle['rsi_14_15m'])
                                     and (last_candle['ema_26_15m'] > last_candle['ema_12_15m'])
-                                    and ((last_candle['ema_26_15m'] - last_candle['ema_12_15m']) > (last_candle['open_15m'] * 0.022))
+                                    and ((last_candle['ema_26_15m'] - last_candle['ema_12_15m']) > (last_candle['open_15m'] * 0.023))
                                     and ((previous_candle['ema_26_15m'] - previous_candle['ema_12_15m']) > (last_candle['open_15m'] / 100.0))
                                     and (last_candle['rsi_3_15m'] > 5.0)
                                     and (last_candle['rsi_3_1h'] > 5.0)
@@ -1457,25 +1460,25 @@ class NostalgiaForInfinityX3(IStrategy):
                                 )
                                 or
                                 (
-                                    (last_candle['rsi_14'] < 32.0)
+                                    (last_candle['rsi_14'] < 36.0)
                                     and (last_candle['rsi_3'] > 5.0)
                                     and (last_candle['rsi_14_15m'] < 32.0)
                                     and (last_candle['rsi_14_15m'] > previous_candle['rsi_14_15m'])
                                     and (last_candle['rsi_3_15m'] > 5.0)
                                     and (last_candle['cti_20_1h'] < 0.5)
-                                    and (last_candle['rsi_3_1h'] > 10.0)
+                                    and (last_candle['rsi_3_1h'] > 20.0)
                                     and (last_candle['rsi_3_4h'] > 20.0)
                                 )
                                 or
                                 (
-                                    (last_candle['rsi_14'] < 34.0)
+                                    (last_candle['rsi_14'] < 36.0)
                                     and (last_candle['rsi_3_15m'] > 5.0)
-                                    and (last_candle['rsi_14_15m'] < 36.0)
+                                    and (last_candle['rsi_14_15m'] < 46.0)
                                     and (last_candle['rsi_14_15m'] > previous_candle['rsi_14_15m'])
                                     and (last_candle['ema_12_15m'] < (last_candle['ema_26_15m'] * 0.990))
                                     and (last_candle['rsi_3_15m'] > 5.0)
                                     and (last_candle['cti_20_1h'] < 0.5)
-                                    and (last_candle['rsi_3_1h'] > 10.0)
+                                    and (last_candle['rsi_3_1h'] > 20.0)
                                     and (last_candle['rsi_3_4h'] > 20.0)
                                 )
                                 or
